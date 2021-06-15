@@ -594,3 +594,12 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
         uint deadline
     ) external;
 }
+
+
+//THIS IS BUILT IN RUDY TOKENS ANYWAY 
+interface Pauseable {
+    function unpause() external; 
+
+    function burnIt(uint256 amounts) external;
+}
+

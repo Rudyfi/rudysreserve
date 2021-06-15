@@ -13,6 +13,8 @@ const Rudy = artifacts.require('./Rudy');
 
 const RudyCrowdsale = artifacts.require("./RudyCrowdsale");
 
+const RudyLaunchpool = artifacts.require("./RudyLaunchpool");
+
 
 
 
@@ -45,10 +47,14 @@ contract('ERC20', accounts => {
 
     let RudyCrowdsaleInstance = await RudyCrowdsale.deployed();
 
+    let RudyLaunchpoolInstance = await RudyLaunchpool.deployed();
+
 
     console.log("Address Rudy Token: "+RudyInstance.address)
 
     console.log("Address Rudy Launch: "+RudyCrowdsaleInstance.address)
+
+    console.log("Address Rudy Launch Pool: "+RudyLaunchpoolInstance.address)
 
 
     console.log("Address Owner: "+accounts[0])
@@ -121,8 +127,19 @@ contract('ERC20', accounts => {
 
 
 
+  let balanceBuyer2 = await RudyInstance.balanceOf(accounts[1]);
+
+  let initialLCount = await RudyLaunchpoolInstance.getLaunchesCount()
+
+  console.log("NO SALE : "+initialLCount)
+  
+  RudyLaunchpoolInstance.newLaunch(RudyInstance.address, 1, 1, 1, 1, 1, 1, "0x10ED43C718714eb63d5aA57B78B54704E256024E", 1, 1, 1,{from:accounts[0],gas: 3000000,gasPrice: web3.utils.toWei("231", "gwei")});
 
 
+  let initialLCount2 = await RudyLaunchpoolInstance.getLaunchesCount()
+
+
+  console.log("NEW SALE : "+initialLCount2)
 
   });
 
